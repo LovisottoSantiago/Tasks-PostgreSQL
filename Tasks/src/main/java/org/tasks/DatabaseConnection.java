@@ -4,7 +4,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,18 +12,11 @@ public class DatabaseConnection {
 
     private static final String URL = "jdbc:postgresql://localhost:5432/tasks_db";
 
-    public Connection getConnection() {
+    
+    public Connection getConnection(String username, String password) {
         try {
-            try (Scanner scanner = new Scanner(System.in)) {
-                System.out.print("Please, enter your username: ");
-                String username = scanner.nextLine();
-                System.out.print("Please, enter your password: ");
-                String password = scanner.nextLine();
-
-                return DriverManager.getConnection(URL, username, password);
-            }
-        }
-        catch (SQLException e) {
+            return DriverManager.getConnection(URL, username, password);
+        } catch (SQLException e) {
             logger.log(Level.SEVERE, "An exception has occurred", e);
             return null;
         }

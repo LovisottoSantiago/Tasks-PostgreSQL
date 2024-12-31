@@ -5,30 +5,61 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        DatabaseConnection db = new DatabaseConnection();
-        Connection connection = db.getConnection();
+        try (Scanner scanner = new Scanner(System.in)) {
+            DatabaseConnection db = new DatabaseConnection();
 
-        if (connection != null){
-            System.out.println("Connection successfully");
-        } else {
-            System.out.println("Connection error");
-        }
+            System.out.print("Please, enter your username: ");
+            String username = scanner.nextLine();
 
-        if (connection != null) {
-                    try (Scanner scanner = new Scanner(System.in)) {
-                        System.out.print("Enter task title: ");
-                        String title = scanner.nextLine();
+            System.out.print("Please, enter your password: ");
+            String password = scanner.nextLine();
 
-                        System.out.print("Enter task description: ");
-                        String description = scanner.nextLine();
+            Connection connection = db.getConnection(username, password);
 
-                        db.insertRow(connection, title, description);
+            if (connection != null) {
+                System.out.println("Connection successfully");
+                boolean menu = true;
+                while (menu) {
+                    System.out.println("Task Manager Menu");
+                    System.out.println("1. Insert a new row");
+                    System.out.println("2. Delete a row");
+                    System.out.println("3. Exit");
+                    System.out.print("Enter your option: ");
+                    try {
+                        String option = scanner.nextLine();
+
+                        switch (option) {
+                            case "1" -> {
+                                System.out.print("Enter task title: ");
+                                String title = scanner.nextLine();
+
+                                System.out.print("Enter task description: ");
+                                String description = scanner.nextLine();
+
+                                db.insertRow(connection, title, description);
+                            }
+                            case "2" -> {
+                                System.out.print("Enter the ID of the task to delete: ");
+                                int taskId = scanner.nextInt();
+                                scanner.nextLine();
+
+                                System.out.println("Delete operation is not yet implemented.");
+                            }
+                            case "3" -> {
+                                System.out.println("Exiting the application. Goodbye!");
+                                menu = false;
+                                System.exit(0);                                
+                            }
+                            default -> System.out.println("Invalid option. Please try again.");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("An error occurred: " + e.getMessage());
+                        scanner.nextLine(); // Consumir entrada incorrecta
                     }
                 }
-
+            } else {
+                System.out.println("Connection error");
+            }
+        }
     }
-
-
-
-
 }

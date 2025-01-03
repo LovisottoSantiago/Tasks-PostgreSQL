@@ -23,7 +23,8 @@ public class Main {
                     System.out.println("Task Manager Menu");
                     System.out.println("1. Insert a new row");
                     System.out.println("2. Delete a row");
-                    System.out.println("3. Exit");
+                    System.out.println("3. Show items");
+                    System.out.println("4. Exit");
                     System.out.print("Enter your option: ");
                     try {
                         String option = scanner.nextLine();
@@ -46,6 +47,9 @@ public class Main {
                                 System.out.println("Delete operation is not yet implemented.");
                             }
                             case "3" -> {
+                                db.showItems(connection);                             
+                            }
+                            case "4" -> {
                                 System.out.println("Exiting the application. Goodbye!");
                                 menu = false;
                                 System.exit(0);                                

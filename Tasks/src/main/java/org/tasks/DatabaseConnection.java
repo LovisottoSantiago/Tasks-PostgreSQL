@@ -2,6 +2,7 @@ package org.tasks;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.logging.Level;
@@ -20,6 +21,23 @@ public class DatabaseConnection {
             logger.log(Level.SEVERE, "An exception has occurred", e);
             return null;
         }
+    }
+
+
+    public void showItems(Connection conn) {
+        String query = "SELECT * FROM public.tasks ORDER BY id ASC";
+        try (PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery()) {
+            
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String title = resultSet.getString("title");                
+                System.out.println("ID: " + id + ", Title: " + title);
+            }
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error trying to show items in the database");
+        }
+
     }
 
     public void insertRow(Connection conn, String title, String description) {        

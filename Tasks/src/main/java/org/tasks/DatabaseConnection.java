@@ -34,7 +34,8 @@ public class DatabaseConnection {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String title = resultSet.getString("title");                
-                System.out.println("ID: " + id + ", Title: " + title);
+                String description = resultSet.getString("description");                
+                System.out.println("ID: " + id + ", Title: " + title + ", " + description);
             }
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error trying to show items in the database");

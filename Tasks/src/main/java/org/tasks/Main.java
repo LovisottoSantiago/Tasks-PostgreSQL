@@ -48,6 +48,7 @@ public class Main {
                                 scanner.nextLine();
                             }
                             case "2" -> {
+                                db.showItems(connection);
                                 System.out.print("Enter the ID of the task to delete: ");
                                 int taskId = scanner.nextInt();
                                 scanner.nextLine();

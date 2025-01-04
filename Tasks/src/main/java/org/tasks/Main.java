@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         try (Scanner scanner = new Scanner(System.in)) {
             DatabaseConnection db = new DatabaseConnection();
 
@@ -17,10 +18,15 @@ public class Main {
             Connection connection = db.getConnection(username, password);
 
             if (connection != null) {
-                System.out.println("Connection successfully");
-                boolean menu = true;
+                System.out.println("Connection successfully\n");
+                boolean menu = true; 
                 while (menu) {
-                    System.out.println("Task Manager Menu");
+                    System.out.println("███╗   ███╗███████╗███╗   ██╗██╗   ██╗");
+                    System.out.println("████╗ ████║██╔════╝████╗  ██║██║   ██║");
+                    System.out.println("██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║");
+                    System.out.println("██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║");
+                    System.out.println("██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝");
+                    System.out.println("╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ");                                     
                     System.out.println("1. Insert a new row");
                     System.out.println("2. Delete a row");
                     System.out.println("3. Show items");
@@ -38,27 +44,33 @@ public class Main {
                                 String description = scanner.nextLine();
 
                                 db.insertRow(connection, title, description);
+                                System.out.println("\nTouch any key to return to the menu");
+                                scanner.nextLine();
                             }
                             case "2" -> {
                                 System.out.print("Enter the ID of the task to delete: ");
                                 int taskId = scanner.nextInt();
                                 scanner.nextLine();
-
-                                System.out.println("Delete operation is not yet implemented.");
+                                db.deleteRow(connection, taskId);
+                                System.out.println("\nTouch any key to return to the menu");
+                                scanner.nextLine();
                             }
                             case "3" -> {
                                 db.showItems(connection);                             
+                                System.out.println("\nTouch any key to return to the menu");
+                                scanner.nextLine();
                             }
                             case "4" -> {
                                 System.out.println("Exiting the application. Goodbye!");
-                                menu = false;
+                                menu = false;      
+                                System.out.println(menu);                          
                                 System.exit(0);                                
                             }
                             default -> System.out.println("Invalid option. Please try again.");
                         }
                     } catch (Exception e) {
                         System.out.println("An error occurred: " + e.getMessage());
-                        scanner.nextLine(); // Consumir entrada incorrecta
+                        scanner.nextLine();
                     }
                 }
             } else {

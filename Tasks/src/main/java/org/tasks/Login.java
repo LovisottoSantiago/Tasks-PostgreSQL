@@ -1,6 +1,7 @@
 
 package org.tasks;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.util.Scanner;
 
@@ -19,20 +20,23 @@ public class Login extends javax.swing.JFrame {
         getUsername = new javax.swing.JTextField();
         getPassword = new javax.swing.JPasswordField();
         login = new javax.swing.JToggleButton();
-        jLabel1 = new javax.swing.JLabel();
+        connectionFlag = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         getUsername.setBackground(new java.awt.Color(255, 255, 255));
         getUsername.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        getUsername.setForeground(new java.awt.Color(51, 102, 255));
+        getUsername.setForeground(new java.awt.Color(51, 51, 51));
         getUsername.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getUsername.setText("username");
         getUsername.setToolTipText("");
         getUsername.setActionCommand("<Not Set>");
-        getUsername.setBorder(null);
+        getUsername.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         getUsername.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getUsername.setOpaque(true);
         getUsername.addActionListener(new java.awt.event.ActionListener() {
@@ -40,52 +44,56 @@ public class Login extends javax.swing.JFrame {
                 getUsernameActionPerformed(evt);
             }
         });
-        jPanel1.add(getUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 370, 62));
+        jPanel1.add(getUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 300, 62));
 
         getPassword.setBackground(new java.awt.Color(255, 255, 255));
         getPassword.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        getPassword.setForeground(new java.awt.Color(51, 102, 255));
+        getPassword.setForeground(new java.awt.Color(51, 51, 51));
         getPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getPassword.setText("jPasswordField1");
-        getPassword.setBorder(null);
+        getPassword.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         getPassword.setOpaque(true);
         getPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 getPasswordActionPerformed(evt);
             }
         });
-        jPanel1.add(getPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 370, 62));
+        jPanel1.add(getPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 300, 62));
 
         login.setBackground(new java.awt.Color(255, 255, 255));
         login.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
-        login.setForeground(new java.awt.Color(0, 0, 0));
-        login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/login.png"))); // NOI18N
+        login.setForeground(new java.awt.Color(51, 51, 51));
         login.setText("Login");
-        login.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        login.setOpaque(true);
+        login.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        login.setFocusPainted(false);
         login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginActionPerformed(evt);
             }
         });
-        jPanel1.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 490, 310, 70));
+        jPanel1.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 320, 60));
 
-        jLabel1.setBackground(null);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/bg.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jLabel1.setDisabledIcon(null);
-        jLabel1.setOpaque(true);
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 872, -1));
+        connectionFlag.setBackground(new java.awt.Color(0, 0, 0));
+        connectionFlag.setFont(new java.awt.Font("Poppins SemiBold", 0, 18)); // NOI18N
+        connectionFlag.setForeground(new java.awt.Color(0, 51, 102));
+        connectionFlag.setText("not logged in");
+        jPanel1.add(connectionFlag, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, -1, -1));
+
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Poppins SemiBold", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Connection status: ");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 870, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -105,10 +113,12 @@ public class Login extends javax.swing.JFrame {
 						Connection connection = db.getConnection(username, password);
 
 						if (connection != null) {
-								System.out.println("Connection successfully\n");
+								connectionFlag.setText("Connection successfully!");
+								connectionFlag.setForeground(Color.green);
 						}
 						else {
-								System.out.println("Error");
+								connectionFlag.setText("Error");
+								connectionFlag.setForeground(Color.red);
 						}
 				}
 				catch(Exception e){
@@ -158,9 +168,10 @@ public class Login extends javax.swing.JFrame {
 		
 		
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel connectionFlag;
     private javax.swing.JPasswordField getPassword;
     private javax.swing.JTextField getUsername;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton login;
     // End of variables declaration//GEN-END:variables
